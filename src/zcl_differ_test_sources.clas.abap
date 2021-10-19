@@ -63,19 +63,27 @@ CLASS zcl_differ_test_sources IMPLEMENTATION.
       IF <ls_diff>-buffer1-len > 0 AND <ls_diff>-buffer2-len > 0.
         ls_delta-vrsflag = 'U'. "zif_abapgit_definitions=>c_diff-update.
         ls_delta-number  = <ls_diff>-buffer1-key.
-        ls_delta-line    = <ls_diff>-buffer1content[ 1 ].
+        LOOP AT <ls_diff>-buffer1content ASSIGNING FIELD-SYMBOL(<content>).
+          ls_delta-line = <content>.
+          INSERT ls_delta INTO TABLE rt_delta.
+        ENDLOOP.
       ELSEIF <ls_diff>-buffer1-len > 0.
         ls_delta-vrsflag = 'D'. "zif_abapgit_definitions=>c_diff-delete.
         ls_delta-number  = <ls_diff>-buffer1-key.
-        ls_delta-line    = <ls_diff>-buffer1content[ 1 ].
+        LOOP AT <ls_diff>-buffer1content ASSIGNING <content>.
+          ls_delta-line = <content>.
+          INSERT ls_delta INTO TABLE rt_delta.
+        ENDLOOP.
       ELSEIF <ls_diff>-buffer2-len > 0.
         ls_delta-vrsflag = 'I'. "zif_abapgit_definitions=>c_diff-insert.
         ls_delta-number  = <ls_diff>-buffer2-key.
-        ls_delta-line    = <ls_diff>-buffer2content[ 1 ].
+        LOOP AT <ls_diff>-buffer2content ASSIGNING <content>.
+          ls_delta-line = <content>.
+          INSERT ls_delta INTO TABLE rt_delta.
+        ENDLOOP.
       ELSE.
         ASSERT 0 = 1.
       ENDIF.
-      INSERT ls_delta INTO TABLE rt_delta.
     ENDLOOP.
 
   ENDMETHOD.

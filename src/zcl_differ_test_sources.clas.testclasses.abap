@@ -14,20 +14,16 @@ CLASS ltcl_diff_sources DEFINITION FOR TESTING
 
     METHODS:
       setup,
-      test FOR TESTING.
+      test,
+      differ_prog FOR TESTING,
+      dot_abapgit FOR TESTING.
 
 ENDCLASS.
 
 CLASS ltcl_diff_sources IMPLEMENTATION.
 
   METHOD setup.
-
-    READ REPORT 'Z_DIFFER_TEST_PROG' INTO mt_old.
-    cl_abap_unit_assert=>assert_subrc( ).
-
-    READ REPORT 'Z_DIFFER_TEST_PROG_NEW' INTO mt_new.
-    cl_abap_unit_assert=>assert_subrc( ).
-
+    CLEAR: mt_old, mt_new.
   ENDMETHOD.
 
   METHOD test.
@@ -46,5 +42,24 @@ CLASS ltcl_diff_sources IMPLEMENTATION.
       exp = lt_sap ).
 
   ENDMETHOD.
+
+  METHOD differ_prog.
+    READ REPORT 'Z_DIFFER_TEST_PROG' INTO mt_old.
+    cl_abap_unit_assert=>assert_subrc( ).
+    READ REPORT 'Z_DIFFER_TEST_PROG_NEW' INTO mt_new.
+    cl_abap_unit_assert=>assert_subrc( ).
+
+    test( ).
+  ENDMETHOD.
+
+  METHOD dot_abapgit.
+    READ REPORT 'ZIF_ABAPGIT_DOT_ABAPGIT_OLD===IU' INTO mt_old.
+    cl_abap_unit_assert=>assert_subrc( ).
+    READ REPORT 'ZIF_ABAPGIT_DOT_ABAPGIT=======IU' INTO mt_new.
+    cl_abap_unit_assert=>assert_subrc( ).
+
+    test( ).
+  ENDMETHOD.
+
 
 ENDCLASS.
