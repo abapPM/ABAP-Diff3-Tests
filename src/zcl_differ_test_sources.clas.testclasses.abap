@@ -53,9 +53,9 @@ CLASS ltcl_diff_sources IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD dot_abapgit.
-    READ REPORT 'ZIF_ABAPGIT_DOT_ABAPGIT_OLD===IU' INTO mt_old.
+    READ REPORT 'ZIF_DIFFER_TEST_INTF==========IU' INTO mt_old.
     cl_abap_unit_assert=>assert_subrc( ).
-    READ REPORT 'ZIF_ABAPGIT_DOT_ABAPGIT=======IU' INTO mt_new.
+    READ REPORT 'ZIF_DIFFER_TEST_INTF_OLD======IU' INTO mt_new.
     cl_abap_unit_assert=>assert_subrc( ).
 
     test( ).

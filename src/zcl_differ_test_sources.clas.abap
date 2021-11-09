@@ -39,7 +39,6 @@ CLASS zcl_differ_test_sources IMPLEMENTATION.
     DATA:
       lt_buffer1 TYPE string_table,
       lt_buffer2 TYPE string_table,
-      li_diff3   TYPE REF TO zif_differ_diff3,
       ls_delta   LIKE LINE OF rt_delta.
 
     LOOP AT it_old ASSIGNING FIELD-SYMBOL(<ls_code>).
@@ -50,9 +49,7 @@ CLASS zcl_differ_test_sources IMPLEMENTATION.
       INSERT |{ <ls_code>-line }| INTO TABLE lt_buffer2.
     ENDLOOP.
 
-    li_diff3 = NEW zcl_differ_diff3( ).
-
-    DATA(lt_diffs) = li_diff3->diff_indices(
+    DATA(lt_diffs) = zcl_differ_diff3=>create( )->diff_indices(
       it_buffer1 = lt_buffer1
       it_buffer2 = lt_buffer2 ).
 
@@ -66,6 +63,7 @@ CLASS zcl_differ_test_sources IMPLEMENTATION.
         LOOP AT <ls_diff>-buffer1content ASSIGNING FIELD-SYMBOL(<lv_content>).
           ls_delta-line = <lv_content>.
           INSERT ls_delta INTO TABLE rt_delta.
+          ls_delta-number = ls_delta-number + 1.
         ENDLOOP.
       ELSEIF <ls_diff>-buffer1-len > 0.
         ls_delta-vrsflag = 'D'. "zif_abapgit_definitions=>c_diff-delete.
@@ -73,6 +71,7 @@ CLASS zcl_differ_test_sources IMPLEMENTATION.
         LOOP AT <ls_diff>-buffer1content ASSIGNING <lv_content>.
           ls_delta-line = <lv_content>.
           INSERT ls_delta INTO TABLE rt_delta.
+          ls_delta-number = ls_delta-number + 1.
         ENDLOOP.
       ELSEIF <ls_diff>-buffer2-len > 0.
         ls_delta-vrsflag = 'I'. "zif_abapgit_definitions=>c_diff-insert.
@@ -80,6 +79,7 @@ CLASS zcl_differ_test_sources IMPLEMENTATION.
         LOOP AT <ls_diff>-buffer2content ASSIGNING <lv_content>.
           ls_delta-line = <lv_content>.
           INSERT ls_delta INTO TABLE rt_delta.
+          ls_delta-number = ls_delta-number + 1.
         ENDLOOP.
       ELSE.
         ASSERT 0 = 1.
