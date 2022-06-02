@@ -38,7 +38,8 @@
 			"allowed": [
 				"CLAS",
 				"DEVC",
-				"INTF"
+				"INTF",
+				"PROG"
 			],
 			"exclude": [],
 			"severity": "Error"
@@ -477,7 +478,7 @@
 		},
 		"object_naming": {
 			"auth": "^Z",
-			"clas": "^ZC(L|X)\\_DIFF3",
+			"clas": "^ZC(L|X)\\_DIFF",
 			"doma": "^Z",
 			"dtel": "^Z",
 			"enqu": "^EZ_",
@@ -486,11 +487,11 @@
 			"idoc": "^Z",
 			"ignoreNames": [],
 			"ignorePatterns": [],
-			"intf": "^ZIF\\_DIFF3",
+			"intf": "^ZIF\\_DIFF",
 			"msag": "^Z",
 			"patternKind": "required",
 			"pinf": "^Z",
-			"prog": "^Z_DIFF3",
+			"prog": "^Z_DIFF",
 			"severity": "Error",
 			"shlp": "^Z",
 			"ssfo": "^Z",
