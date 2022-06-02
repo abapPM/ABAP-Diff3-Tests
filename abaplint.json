@@ -295,7 +295,7 @@
 			"severity": "Error"
 		},
 		"global_class": {
-			"exclude": [],
+			"exclude": [".*"],
 			"severity": "Error"
 		},
 		"identical_conditions": {
@@ -400,7 +400,7 @@
 			"severity": "Error"
 		},
 		"main_file_contents": {
-			"exclude": [],
+			"exclude": [".*"],
 			"severity": "Error"
 		},
 		"many_parentheses": {
@@ -685,7 +685,7 @@
 			"severity": "Error"
 		},
 		"unknown_types": {
-			"exclude": [],
+			"exclude": [".*"],
 			"severity": "Error"
 		},
 		"unreachable_code": {
