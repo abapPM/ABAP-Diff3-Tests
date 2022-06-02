@@ -28,12 +28,12 @@ CLASS ltcl_diff_sources IMPLEMENTATION.
 
   METHOD test.
 
-    " Compare SAP standard diff with ABAP Differ implementation
-    DATA(lt_sap) = zcl_differ_test_sources=>get_delta_sap(
+    " Compare SAP standard diff with ABAP Diff3 implementation
+    DATA(lt_sap) = zcl_diff3_test_sources=>get_delta_sap(
       it_old = mt_old
       it_new = mt_new ).
 
-    DATA(lt_diff) = zcl_differ_test_sources=>get_delta_diff3(
+    DATA(lt_diff) = zcl_diff3_test_sources=>get_delta_diff3(
       it_old = mt_old
       it_new = mt_new ).
 

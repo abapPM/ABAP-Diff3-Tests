@@ -1,12 +1,12 @@
-CLASS zcl_differ_test_sources DEFINITION
+CLASS zcl_diff3_test_sources DEFINITION
   PUBLIC
   FINAL
   CREATE PUBLIC.
 
 ************************************************************************
-* ABAP Differ - Test for Diffing ABAP Source Code
+* ABAP Diff3 - Test for Diffing ABAP Source Code
 *
-* Copyright 2021 Marc Bernard <https://marcbernardtools.com/>
+* Copyright 2022 Marc Bernard <https://marcbernardtools.com/>
 * SPDX-License-Identifier: MIT
 ************************************************************************
   PUBLIC SECTION.
@@ -31,7 +31,7 @@ ENDCLASS.
 
 
 
-CLASS zcl_differ_test_sources IMPLEMENTATION.
+CLASS zcl_diff3_test_sources IMPLEMENTATION.
 
 
   METHOD get_delta_diff3.
@@ -49,11 +49,11 @@ CLASS zcl_differ_test_sources IMPLEMENTATION.
       INSERT |{ <ls_code>-line }| INTO TABLE lt_buffer2.
     ENDLOOP.
 
-    DATA(lt_diffs) = zcl_differ_diff3=>create( )->diff_indices(
+    DATA(lt_diffs) = zcl_diff3=>create( )->diff_indices(
       it_buffer1 = lt_buffer1
       it_buffer2 = lt_buffer2 ).
 
-    zcl_differ_diff3=>convert_to_abap_indices( CHANGING ct_diff_indices = lt_diffs ).
+    zcl_diff3=>convert_to_abap_indices( CHANGING ct_diff_indices = lt_diffs ).
 
     LOOP AT lt_diffs ASSIGNING FIELD-SYMBOL(<ls_diff>).
       CLEAR ls_delta.
