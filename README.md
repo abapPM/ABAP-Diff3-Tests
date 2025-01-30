@@ -1,3 +1,3 @@
 # ABAP Diff3 Tests
 
-Tests for [ABAP Diff3](https://github.com/Marc-Bernard-Tools/ABAP-Diff3)
+Tests for [ABAP Diff3](https://github.com/abapPM/ABAP-Diff3)
